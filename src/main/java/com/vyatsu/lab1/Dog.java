@@ -1,4 +1,4 @@
-package com.company;
+package com.vyatsu.lab1;
 
 final class Dog extends Animal {
     public Dog(String name) {

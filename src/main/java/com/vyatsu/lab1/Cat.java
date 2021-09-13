@@ -1,4 +1,4 @@
-package com.company;
+package com.vyatsu.lab1;
 public class Cat extends Animal {
     public Cat(String name) {
         super(name, 200, 0);

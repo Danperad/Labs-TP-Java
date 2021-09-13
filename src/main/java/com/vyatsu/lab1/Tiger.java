@@ -1,4 +1,4 @@
-package com.company;
+package com.vyatsu.lab1;
 
 public class Tiger extends Cat{
     public Tiger(String name) {
