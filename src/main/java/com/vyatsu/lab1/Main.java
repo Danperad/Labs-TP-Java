@@ -5,7 +5,7 @@ import java.io.IOException;
 public class Main {
 
     public static void main(String[] args) throws IOException {
-        Object[] animals = new Object[5];
+        Animal[] animals = new Animal[5];
         int[] nums = new int[] {0,0,0};
         animals[0] = new Dog("Бобик");
         animals[1] = new Cat("Барсик");
@@ -17,38 +17,22 @@ public class Main {
         for (int i = 0; i < 5; i++) {
             switch (animals[i].toString()) {
                 case "Dog" -> {
-                    Dog dog = (Dog) animals[i];
-                    dog.Run(toRun);
+                    animals[i].Run(toRun);
                     nums[0]++;
                 }
                 case "Cat" -> {
-                    Cat cat = (Cat) animals[i];
-                    cat.Run(toRun);
+                    animals[i].Run(toRun);
                     nums[1]++;
                 }
                 case "Tiger" -> {
-                    Tiger tiger = (Tiger) animals[i];
-                    tiger.Run(toRun);
+                    animals[i].Run(toRun);
                     nums[2]++;
                 }
             }
         }
         System.out.println();
         for (int i = 0; i < 5; i++) {
-            switch (animals[i].toString()) {
-                case "Dog" -> {
-                    Dog dog = (Dog) animals[i];
-                    dog.Swim(toSwim);
-                }
-                case "Cat" -> {
-                    Cat cat = (Cat) animals[i];
-                    cat.Swim(toSwim);
-                }
-                case "Tiger" -> {
-                    Tiger tiger = (Tiger) animals[i];
-                    tiger.Swim(toSwim);
-                }
-            }
+            animals[i].Swim(toSwim);
         }
         System.out.println("Собак - " + nums[0] + ", котов - "+ nums[1]+ " и тигров - " + nums[2]);
     }
