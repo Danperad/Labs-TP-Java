@@ -3,7 +3,7 @@ package com.vyatsu.lab2;
 public class Cat implements IParticipant {
     private final int maxRun;
     private final int maxJump;
-    private String name;
+    private final String name;
     private boolean isRun = false;
 
     public Cat(String name, int run, int jump) {
@@ -13,19 +13,17 @@ public class Cat implements IParticipant {
     }
 
     @Override
-    public void Jump() {
+    public void jump() {
         System.out.println(name + "Прыгнул");
     }
 
     @Override
-    public void JumpWall(Wall wall) {
-        if (wall.GetHeight() > this.maxJump) {
-            System.out.println(name + " не может перепрыгнуть " + wall.GetHeight());
-        } else System.out.println(name + " перепрыгнул препятствие " + wall.GetHeight());
+    public int getMaxJump() {
+        return this.maxJump;
     }
 
     @Override
-    public void Run() {
+    public void run() {
         if (!isRun) {
             System.out.println(name + " побежал");
             isRun = true;
@@ -33,7 +31,7 @@ public class Cat implements IParticipant {
     }
 
     @Override
-    public void Stop() {
+    public void stop() {
         if (isRun) {
             System.out.println(name + " остановился");
             isRun = false;
@@ -41,9 +39,21 @@ public class Cat implements IParticipant {
     }
 
     @Override
-    public void RunTreadmill(Treadmill treadmill) {
-        if (treadmill.GetHeight() > this.maxRun) {
-            System.out.println(name + " не может пробежать "+treadmill.GetHeight());
-        } else System.out.println(name + " пробежал препятствие "+treadmill.GetHeight());
+    public int getMaxRun() {
+        return this.maxRun;
+    }
+
+    @Override
+    public String getName() {
+        return this.name;
+    }
+
+    @Override
+    public void getLet(ILet let) {
+        switch (let.getType()) {
+            case WALL -> ((Wall) let).toJump(this);
+            case TREADMILL -> ((Treadmill) let).toRun(this);
+            default -> System.out.println("Незивестное препятствие");
+        }
     }
 }

@@ -16,12 +16,7 @@ public class Main {
         };
         for (ILet let: lets) {
             for (IParticipant p: participants) {
-                if(let instanceof Wall) {
-                    p.JumpWall((Wall) let);
-                }
-                else {
-                    p.RunTreadmill((Treadmill) let);
-                }
+                p.getLet(let);
             }
         }
     }
