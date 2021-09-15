@@ -47,13 +47,4 @@ public class Cat implements IParticipant {
     public String getName() {
         return this.name;
     }
-
-    @Override
-    public void getLet(ILet let) {
-        switch (let.getType()) {
-            case WALL -> ((Wall) let).toJump(this);
-            case TREADMILL -> ((Treadmill) let).toRun(this);
-            default -> System.out.println("Незивестное препятствие");
-        }
-    }
 }

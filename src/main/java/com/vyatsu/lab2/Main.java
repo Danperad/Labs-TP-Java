@@ -16,8 +16,9 @@ public class Main {
         };
         for (ILet let: lets) {
             for (IParticipant p: participants) {
-                p.getLet(let);
+                let.toGet(p);
             }
+            System.out.println();
         }
     }
 }
