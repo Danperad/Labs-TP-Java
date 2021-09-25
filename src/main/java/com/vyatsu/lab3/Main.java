@@ -2,8 +2,15 @@ package com.vyatsu.lab3;
 
 public class Main {
     public static void main(String[]args){
-        String[][] n = new String[3][3];
-        n[0][0] = "2";
+        String[][] n = new String[4][4];
+        int i = 0;
+        for (int j = 0; j < n.length; j++){
+            for (int k = 0;k < n[j].length;k++){
+                n[j][k] = String.valueOf(i);
+                i++;
+            }
+        }
+        n[3][2] = "k";
         System.out.println(sumMatrix(n));
     }
     private static int sumMatrix(String[][] matrix){
@@ -16,8 +23,7 @@ public class Main {
                     sum += Integer.parseInt(matrix[i][j]);
                 }
             }
-        }
-        catch (MyArraySizeExceptin | MyArrayDataExceptin e){
+        } catch (MyArraySizeExceptin | MyArrayDataExceptin e) {
             e.printStackTrace();
         }
 
