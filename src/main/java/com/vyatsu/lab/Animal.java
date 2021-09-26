@@ -1,4 +1,4 @@
-package com.vyatsu.lab1;
+package com.vyatsu.lab;
 abstract class Animal {
     private String name;
     private int run;

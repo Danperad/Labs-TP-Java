@@ -1,4 +1,4 @@
-package com.vyatsu.lab1;
+package com.vyatsu.lab;
 
 import java.io.IOException;
 
