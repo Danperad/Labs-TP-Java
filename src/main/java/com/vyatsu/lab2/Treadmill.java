@@ -10,6 +10,7 @@ public class Treadmill implements ILet{
     public void toGet(IParticipant person) {
         if (this.height > person.getMaxRun()) {
             System.out.println(person.getName() + " не может пробежать "+this.height);
+            person.notActive();
         } else System.out.println(person.getName() + " пробежал препятствие "+this.height);
     }
 }

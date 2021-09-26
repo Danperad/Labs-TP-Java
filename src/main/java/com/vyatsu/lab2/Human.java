@@ -5,6 +5,7 @@ public class Human implements IParticipant {
     private final int maxJump;
     private final String name;
     private boolean isRun = false;
+    private boolean active = true;
 
     public Human(String name, int run, int jump) {
         this.maxRun = run;
@@ -46,5 +47,15 @@ public class Human implements IParticipant {
     @Override
     public String getName() {
         return this.name;
+    }
+
+    @Override
+    public boolean isActive() {
+        return active;
+    }
+
+    @Override
+    public void notActive() {
+        this.active = false;
     }
 }

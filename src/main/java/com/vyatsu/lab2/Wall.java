@@ -10,6 +10,7 @@ public class Wall implements ILet{
     public void toGet(IParticipant person) {
         if (this.height > person.getMaxJump()) {
             System.out.println(person.getName() + " не может перепрыгнуть "+this.height);
+            person.notActive();
         } else System.out.println(person.getName() + " перепрыгнул препятствие "+this.height);
     }
 }

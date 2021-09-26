@@ -16,7 +16,7 @@ public class Main {
         };
         for (ILet let: lets) {
             for (IParticipant p: participants) {
-                let.toGet(p);
+                if(p.isActive()) let.toGet(p);
             }
             System.out.println();
         }
