@@ -1,4 +1,4 @@
-package com.vyatsu.lab2;
+package com.vyatsu.lab;
 
 public class Treadmill implements ILet{
     private final int height;

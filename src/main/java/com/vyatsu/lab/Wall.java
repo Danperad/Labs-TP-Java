@@ -1,4 +1,4 @@
-package com.vyatsu.lab2;
+package com.vyatsu.lab;
 
 public class Wall implements ILet{
     private final int height;

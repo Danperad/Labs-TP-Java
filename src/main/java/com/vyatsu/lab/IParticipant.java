@@ -1,4 +1,4 @@
-package com.vyatsu.lab2;
+package com.vyatsu.lab;
 
 public interface IParticipant extends IRunable, IJumpable{
     boolean isActive();

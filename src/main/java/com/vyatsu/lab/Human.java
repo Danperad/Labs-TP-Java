@@ -1,13 +1,13 @@
-package com.vyatsu.lab2;
+package com.vyatsu.lab;
 
-public class Robot implements IParticipant {
+public class Human implements IParticipant {
     private final int maxRun;
     private final int maxJump;
     private final String name;
     private boolean isRun = false;
     private boolean active = true;
 
-    public Robot(String name, int run, int jump) {
+    public Human(String name, int run, int jump) {
         this.maxRun = run;
         this.name = name;
         this.maxJump = jump;
