@@ -1,4 +1,4 @@
-package com.vyatsu.lab3;
+package com.vyatsu.lab;
 
 public class Main {
     public static void main(String[]args){

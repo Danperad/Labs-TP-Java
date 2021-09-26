@@ -1,8 +1,8 @@
-package com.vyatsu.lab3;
+package com.vyatsu.lab;
 
-public class MyArrayDataExceptin extends Throwable {
+public class MyArraySizeExceptin extends Throwable {
     private final String message;
-    public MyArrayDataExceptin(String message) {
+    public MyArraySizeExceptin(String message) {
         this.message = message;
     }
     @Override
