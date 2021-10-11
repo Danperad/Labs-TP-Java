@@ -2,8 +2,8 @@ package com.vyatsu.lab;
 
 public class Main {
     public static void main(String[]args){
-        Mass mass = new Mass(1000000);
-        mass.create();
+        Mass mass = new Mass(100000000);
+        //mass.create();
         mass.createTwo();
     }
 }
