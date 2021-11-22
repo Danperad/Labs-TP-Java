@@ -1,9 +1,10 @@
 package com.vyatsu.lab.task2;
 
-public class Employe {
+public class Employee {
     private final String _name;
     private final int _age;
     private final double _money;
+    private final Role _role;
 
     public String getName() {
         return _name;
@@ -13,13 +14,18 @@ public class Employe {
         return _age;
     }
 
+    public String getRole(){
+        return _role.getRole();
+    }
+
     public double getMoney() {
         return _money;
     }
 
-    public Employe(String name, int age, double money) {
+    public Employee(String name, int age, double money, Role role) {
         _name = name;
         _age = age;
         _money = money;
+        _role = role;
     }
 }

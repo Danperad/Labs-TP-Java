@@ -12,9 +12,9 @@ public class Main {
                 "Task1",
                 "Hello",
                 "Task1",
-                "com/vyatsu/lab/task2",
-                "com/vyatsu/lab/task2",
-                "com/vyatsu/lab/task2")
+                "Task2",
+                "Task2",
+                "Task2")
         );
         Stream<String> task1stream = task1.stream();
         Map<String, Long> task1map = task1stream.collect(Collectors.groupingBy(String::valueOf, Collectors.counting()));
