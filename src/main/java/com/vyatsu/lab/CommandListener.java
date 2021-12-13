@@ -69,6 +69,7 @@ public class CommandListener {
                 products) {
             System.out.println(p.getName());
         }
+        System.out.println();
     }
 
     private void findPersonsByProductTitle(String product) {
@@ -76,7 +77,6 @@ public class CommandListener {
         Session session = HibernateSessionFactoryUtil.getSessionFactory().openSession();
         session.beginTransaction();
         List<Product> list = (List<Product>) session.createQuery(hql).list();
-        session.close();
         if (list.isEmpty()) {
             closeSession(session);
             System.out.println("Данного продукта не существует\n");
@@ -92,6 +92,7 @@ public class CommandListener {
                 clients) {
             System.out.println(c.getName());
         }
+        System.out.println();
     }
 
     private void removePerson(String client) {
