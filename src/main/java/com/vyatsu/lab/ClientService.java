@@ -9,14 +9,6 @@ public class ClientService {
     public ClientService() {
     }
 
-    public Client findClientByName(String name) {
-        return clientsDao.findClientByName(name);
-    }
-
-    public Product findProductByName(String name) {
-        return clientsDao.findProductByName(name);
-    }
-
     public Client findClientByID(int id) {
         return clientsDao.findClientById(id);
     }

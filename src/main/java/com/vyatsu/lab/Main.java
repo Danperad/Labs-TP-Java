@@ -6,18 +6,20 @@ public class Main {
     public static void main(String args[]){
         ClientService clientService = new ClientService();
         Client[] clients = {
+                new Client("Александр"),
                 new Client("Иван"),
-                new Client("Петр")
+                new Client("Дмитрий"),
+                new Client("Петя"),
         };
         Product[] products = {
-                new Product("Яйца", 100),
-                new Product("Колбаса", 250),
-                new Product("Молоко", 50),
-                new Product("Хлеб", 30)
+                new Product("Хлеб", 100),
+                new Product("Творог", 250),
+                new Product("Соль", 50),
+                new Product("Сахар", 30)
         };
         clients[0].addProduct(products[0]);
-        clients[1].addProduct(products[2]);
-        products[3].addClient(clients[0]);
+        clients[2].addProduct(products[3]);
+        products[2].addClient(clients[1]);
         for (Product p : products) {
             clientService.insertProduct(p);
         }

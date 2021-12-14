@@ -67,7 +67,7 @@ public class CommandListener {
         }
         for (Product p :
                 products) {
-            System.out.println(p.getName());
+            System.out.println(p.getTitle());
         }
         System.out.println();
     }

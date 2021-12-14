@@ -7,15 +7,6 @@ import org.hibernate.Transaction;
 import java.util.List;
 
 public class ClientDao {
-    public Client findClientByName(String name)
-    {
-        return HibernateSessionFactoryUtil.getSessionFactory().openSession().get(Client.class, name);
-    }
-    public Product findProductByName(String name)
-    {
-        return HibernateSessionFactoryUtil.getSessionFactory().openSession().get(Product.class, name);
-    }
-
     public Client findClientById(int id) {
         return HibernateSessionFactoryUtil.getSessionFactory().openSession().get(Client.class, id);
     }

@@ -20,7 +20,7 @@ public class Product {
     @Getter
     @Setter
     @Column(name = "title")
-    private String name;
+    private String title;
 
     @Getter
     @Setter
@@ -32,8 +32,8 @@ public class Product {
     @ManyToMany(mappedBy = "products")
     private List<Client> clients;
 
-    public Product(String name, Integer price) {
-        this.name = name;
+    public Product(String title, Integer price) {
+        this.title = title;
         this.price = price;
         clients = new ArrayList<>();
     }
