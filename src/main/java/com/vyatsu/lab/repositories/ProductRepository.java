@@ -30,22 +30,37 @@ public class ProductRepository {
     public Product findById(Long id) {
         try {
             return products.stream().filter(p -> p.getId().equals(id)).findFirst().get();
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             return null;
         }
     }
 
     public void save(Product product) {
-        if (this.findById(product.getId()) == null) products.add(product);
+        if (product.getId() == null) {
+            Long ID = 1L;
+            while (true){
+                if(this.findById(ID) == null) {
+                    product.setId(ID);
+                    break;
+                }
+                ID++;
+            }
+            products.add(product);
+            return;
+        }
+        Product temp = this.findById(product.getId());
+        int index = products.indexOf(temp);
+        products.remove(temp);
+        products.add(index, product);
     }
 
-    public void delete(Product product){
+    public void delete(Product product) {
         products.remove(product);
     }
-    public void change(Product product){
+
+    public void change(Product product) {
         for (Product p : products) {
-            if (p.getId().equals(product.getId())){
+            if (p.getId().equals(product.getId())) {
                 p.setPrice(product.getPrice());
                 p.setTitle(product.getTitle());
                 return;

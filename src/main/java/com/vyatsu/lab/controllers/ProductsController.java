@@ -48,26 +48,29 @@ public class ProductsController {
     }
 
     @GetMapping("/filter/{minPrice}&{maxPrice}&{text}")
-    public String filterProduct(Model model, @RequestParam(name = "minPrice") int min, @RequestParam(name = "maxPrice") int max, @RequestParam(name = "text") String text) {
+    public String filterProduct(Model model, @RequestParam(name = "minPrice") String min, @RequestParam(name = "maxPrice") String max, @RequestParam(name = "text") String text) {
         Product product = new Product();
-        filter.setMaxPrice(max);
-        filter.setMinPrice(min);
+        if(!max.equals("")) filter.setMaxPrice(Integer.parseInt(max));
+        else filter.setMaxPrice(0);
+        if(!min.equals("")) filter.setMinPrice(Integer.parseInt(min));
+        else filter.setMinPrice(0);
         filter.setText(text);
-        model.addAttribute("products", productsService.getFilterProducts(min, max, text));
+        model.addAttribute("products", productsService.getFilterProducts(filter.getMinPrice(), filter.getMaxPrice(), text));
         model.addAttribute("product", product);
         model.addAttribute("filter", filter);
         return "products";
     }
 
-    @PostMapping("/edit")
-    public String editProduct(@ModelAttribute(value = "product") Product product) {
-        productsService.edit(product);
-        return "redirect:/products";
-    }
-
     @GetMapping("/show/{id}")
-    public String showOneProduct(Model model, @PathVariable(value = "id") Long id) {
-        Product product = productsService.getById(id);
+    public String showOneProduct(Model model, @PathVariable(value = "id") String id) {
+        Product product;
+        product = productsService.getById(Long.parseLong(id));
+        model.addAttribute("product", product);
+        return "product-page";
+    }
+    @GetMapping("/show/")
+    public String showOneProduct(Model model) {
+        Product product = new Product();
         model.addAttribute("product", product);
         return "product-page";
     }

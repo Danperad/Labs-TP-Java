@@ -1,18 +1,12 @@
 package com.vyatsu.lab.entities;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
+@Data
 public class Product {
-    @Getter
-    @Setter
     private Long id;
-    @Getter
-    @Setter
-    private String title;
-    @Getter
-    @Setter
-    private int price;
+    private String title = "";
+    private int price = 0;
 
     public Product() {
     }
