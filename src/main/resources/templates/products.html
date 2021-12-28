@@ -13,7 +13,6 @@
     <table class="table table-hover">
         <thead>
         <tr>
-            <th>ID</th>
             <th>Название товара</th>
             <th>Цена</th>
             <th>Действия</th>
@@ -22,11 +21,10 @@
         </thead>
         <tbody>
         <tr th:each="product : ${products}">
-            <td th:text="${product.id}"></td>
             <td th:text="${product.title}"></td>
             <td th:text="${product.price}"></td>
             <td>
-                <a th:href="@{'/products/show/'+${product.id}}" th:text="Редактировать"></a>
+                <a th:href="@{'/products/show/?id='+${product.id}}" th:text="Редактировать"></a>
             </td>
             <td>
                 <form th:action="@{'/products/remove/' + ${product.id}}">
@@ -36,7 +34,25 @@
         </tr>
         </tbody>
     </table>
-    <span th:text="${'Всего товаров ' + products.size()}"></span>
+    <table>
+        <tr>
+            <td>
+                <a th:href="@{'/products/?page=0'}" th:text="1"></a>
+            </td>
+            <td>
+                <a th:href="@{'/products/?page=1'}" th:text="2"></a>
+            </td>
+            <td>
+                <a th:href="@{'/products/?page=2'}" th:text="3"></a>
+            </td>
+            <td>
+                <a th:href="@{'/products/?page=3'}" th:text="4"></a>
+            </td>
+            <td>
+                <a th:href="@{'/products/?page=4'}" th:text="5"></a>
+            </td>
+        </tr>
+    </table>
     <br>
 
     <form th:action="@{/products/show/}" class="form-horizontal">
@@ -47,7 +63,7 @@
         </div>
     </form>
 
-    <form th:action="@{'/products/filter/' + ${filter.minPrice}+'&'+${filter.maxPrice}+'&'+${filter.text}}"
+    <form th:action="@{'/products/?minPrice=' + ${filter.minPrice}+'?maxPrice='+${filter.maxPrice}+'?text='+${filter.text}}"
           th:object="${filter}" method="get"
           class="form-horizontal">
 

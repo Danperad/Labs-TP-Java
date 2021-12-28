@@ -1,54 +1,55 @@
 package com.vyatsu.lab.services;
 
 import com.vyatsu.lab.entities.Product;
+import com.vyatsu.lab.entities.ProductSpecification;
+import com.vyatsu.lab.repositories.Filter;
 import com.vyatsu.lab.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
 import java.util.Locale;
-import java.util.stream.Collectors;
 
 @Service
 public class ProductsService {
+    @Autowired
     private ProductRepository productRepository;
 
-    @Autowired
-    public void setProductRepository(ProductRepository productRepository) {
-        this.productRepository = productRepository;
-    }
-
     public Product getById(Long id) {
-        return productRepository.findById(id);
+        return productRepository.findById(id).get();
     }
 
-    public List<Product> getAllProducts() {
-        return productRepository.findAll();
+    public Page<Product> getAllProducts(Pageable pageable) {
+        return productRepository.findAll(pageable);
     }
 
-    public List<Product> getFilterProducts(int min, int max, String text){
-        List<Product> temp = getAllProducts();
-        if (!text.equals("")) temp = temp.stream().
-                filter(product -> product.getTitle().toLowerCase(Locale.ROOT).contains(text.toLowerCase(Locale.ROOT))).
-                collect(Collectors.toList());
-        if (max!= 0) temp =  temp.stream().
-                filter(product -> product.getPrice() <= max).
-                collect(Collectors.toList());
-        if (min!= 0) temp =  temp.stream().
-                filter(product -> product.getPrice() >= min).
-                collect(Collectors.toList());
-        return temp;
+    public Page<Product> getFilterProducts(Filter filter, Pageable pageable){
+        int min = filter.getMinPrice();
+        int max = filter.getMaxPrice();
+        String text = filter.getText();
+        return productRepository.findAll(Specification.where(ProductSpecification.minValue(min)).and(ProductSpecification.maxValue(max)).and(ProductSpecification.hasText(text.toLowerCase(Locale.ROOT))), pageable);
     }
 
-    public void add(Product product) {
+    public int maxPrice(){
+        return productRepository.findDistinctFirstByPriceGreaterThanOrderByPriceDesc(Integer.MIN_VALUE).getPrice();
+    }
+
+    public int minPrice(){
+        return productRepository.findDistinctFirstByPriceLessThanOrderByPrice(Integer.MAX_VALUE).getPrice();
+    }
+
+    public void save(Product product) {
         productRepository.save(product);
     }
 
-    public void remove(Product product) {
+    public void delete(Product product) {
         productRepository.delete(product);
     }
 
-    public void edit(Product product) {
-        productRepository.change(product);
+    public void deleteByID(Long ID) {
+        productRepository.deleteById(ID);
     }
 }
