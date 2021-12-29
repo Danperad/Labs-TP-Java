@@ -13,10 +13,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
-import java.util.Optional;
 
 @Controller
-@RequestMapping("/products")
 public class ProductsController {
     @Autowired
     private ProductsService productsService;
@@ -25,8 +23,6 @@ public class ProductsController {
     @PostConstruct
     public void post() {
         filter = new Filter();
-        filter.setMinPrice(productsService.minPrice());
-        filter.setMaxPrice(productsService.maxPrice());
     }
 
     @GetMapping
@@ -50,11 +46,16 @@ public class ProductsController {
         model.addAttribute("products", page);
         model.addAttribute("product", product);
         model.addAttribute("filter", filter);
+        model.addAttribute("topproducts", productsService.findTop());
         return "products";
     }
 
-    @PostMapping("/add")
-    public String addProduct(@ModelAttribute(value = "product") Product product) {
+    @GetMapping("/add")
+    public String addProduct(@RequestParam(value = "Name") String Name,
+                             @RequestParam(value = "Price") Integer Price) {
+        Product product = new Product();
+        product.setTitle(Name);
+        product.setPrice(Price);
         productsService.save(product);
         return "redirect:/products";
     }
@@ -66,11 +67,28 @@ public class ProductsController {
     }
 
     @GetMapping("/show/")
-    public String showOneProduct(Model model, @RequestParam(required = false, defaultValue = "", name = "id") String id) {
+    public String showOneProductAdmin(
+            Model model,
+            @RequestParam(name = "id", defaultValue = "", required = false) Long id) {
         Product product;
-        if (id == null || id.isEmpty()) product = new Product();
-        else product = productsService.getById(Long.parseLong(id));
+        if(id == null) product = new Product();
+        else product = productsService.getById(id);
+        model.addAttribute("product", product);
+        return "product-page-admin";
+    }
+
+    @GetMapping("/show_product/{id}")
+    public String showOneProduct(Model model, @PathVariable(value = "id") Long id) {
+        Product product = productsService.getById(id);
+        product.incCount();
+        productsService.save(product);
         model.addAttribute("product", product);
         return "product-page";
+    }
+
+    @PostMapping("/editproduct")
+    public String editProduct(@ModelAttribute(value = "product") Product product) {
+        productsService.save(product);
+        return "redirect:/products";
     }
 }

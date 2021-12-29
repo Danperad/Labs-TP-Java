@@ -1,5 +1,5 @@
 -- SET search_path TO boot;
-CREATE TABLE products (id serial, title varchar(100), price int);
+CREATE TABLE products (id serial, title varchar(100), price int, count int default 0);
 
 INSERT INTO products (title, price) VALUES ('Bread', 40), ('Milk', 80);
 
@@ -12,8 +12,8 @@ CREATE TABLE users (
 
 INSERT INTO users
 VALUES
-('user1', '123', true),
-('user2', '123', true);
+('user1', '{noop}123', true),
+('user2', '{noop}123', true);
 
 CREATE TABLE authorities (
     username varchar(50) NOT NULL,

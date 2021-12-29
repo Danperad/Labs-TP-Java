@@ -11,7 +11,9 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Locale;
+import java.util.stream.Collectors;
 
 @Service
 public class ProductsService {
@@ -30,18 +32,11 @@ public class ProductsService {
         int min = filter.getMinPrice();
         int max = filter.getMaxPrice();
         String text = filter.getText();
-        return productRepository.findAll(Specification.where(ProductSpecification.minValue(min)).and(ProductSpecification.maxValue(max)).and(ProductSpecification.hasText(text.toLowerCase(Locale.ROOT))), pageable);
-    }
-
-    public int maxPrice(){
-        return productRepository.findDistinctFirstByPriceGreaterThanOrderByPriceDesc(Integer.MIN_VALUE).getPrice();
-    }
-
-    public int minPrice(){
-        return productRepository.findDistinctFirstByPriceLessThanOrderByPrice(Integer.MAX_VALUE).getPrice();
+        return (Page<Product>) productRepository.findAll(Specification.where(ProductSpecification.minValue(min)).and(ProductSpecification.maxValue(max)).and(ProductSpecification.hasText(text.toLowerCase(Locale.ROOT))), pageable);
     }
 
     public void save(Product product) {
+        if (product.getId() != null)product.setCount(this.getById(product.getId()).getCount());
         productRepository.save(product);
     }
 
@@ -51,5 +46,8 @@ public class ProductsService {
 
     public void deleteByID(Long ID) {
         productRepository.deleteById(ID);
+    }
+    public List<Product> findTop(){
+        return productRepository.findAll(new Sort(Sort.Direction.DESC, "count")).stream().limit(3).collect(Collectors.toList());
     }
 }

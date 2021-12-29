@@ -17,6 +17,8 @@ public class Product {
     private String title = "";
     @Column
     private int price = 0;
+    @Column
+    private int count = 0;
 
     public Product() {
     }
@@ -25,5 +27,9 @@ public class Product {
         this.id = id;
         this.title = title;
         this.price = price;
+    }
+
+    public void incCount(){
+        count++;
     }
 }
