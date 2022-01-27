@@ -32,7 +32,7 @@ public class ProductsService {
         int min = filter.getMinPrice();
         int max = filter.getMaxPrice();
         String text = filter.getText();
-        return (Page<Product>) productRepository.findAll(Specification.where(ProductSpecification.minValue(min)).and(ProductSpecification.maxValue(max)).and(ProductSpecification.hasText(text.toLowerCase(Locale.ROOT))), pageable);
+        return productRepository.findAll(Specification.where(ProductSpecification.minValue(min)).and(ProductSpecification.maxValue(max)).and(ProductSpecification.hasText(text.toLowerCase(Locale.ROOT))), pageable);
     }
 
     public void save(Product product) {
